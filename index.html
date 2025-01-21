@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>面接練習100本ノック</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            color: #333;
+            font-size: 36px;
+        }
+        button {
+            font-size: 30px;
+            padding: 20px 40px;
+            margin: 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #question {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #333;
+            text-align: center;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #007BFF;
+            max-width: 80%;
+        }
+        #timer {
+            font-size: 48px;
+            color: #FF0000;
+        }
+        #startButton, #nextButton {
+            display: none;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>面接練習100本ノック</h1>
+    <button id="startButton">スタートボタン</button>
+    <button id="nextButton">次の質問</button>
+    <div id="question"></div>
+    <div id="timer"></div>
+
+    <script>
+        const questions = [
+            "自己紹介をしてください。",
+            "本校を志望した理由を教えてください",
+            "なぜ本校の〇〇科を希望しましたか？",
+            "本校について知っていることを教えてください",
+            "体験入学の感想を教えてください",
+            "あなたの得意なことは何ですか？",
+            "自分を動物にたとえると何ですか？",
+            "最近気になるニュースは何ですか？",
+            "将来どんな仕事をしたいですか？",
+            "どんな職業に興味がありますか？",
+            "将来の夢を教えてください。",
+            "好きな教科は何ですか？その理由",
+            "苦手な教科は何ですか？その理由",
+            "学校では委員会や係活動は何をしていますか？",
+            "友達とどんなことをして遊びますか？",
+            "中学校で所属していた部活・クラブの魅力",
+            "部活動を通して学んだことは何ですか？",
+            "文武両道のために必要なことは？",
+            "好きなスポーツは何ですか？",
+            "家族とどんなことをして過ごしますか？",
+            "好きな歴史上の人物は？",
+            "中学校時代の一番の思い出は？",
+            "夢中になっている趣味は何ですか？",
+            "休日の過ごし方は？",
+            "あなたのスマホの使い方について教えてください",
+            "好きなアニメや映画は何ですか？",
+            "好きな季節はいつですか？その理由",
+            "今まで読んだ本で印象に残っているものは？",
+            "あなたの学校の自慢は？",
+            "長所と短所を教えてください。",
+            "自己PRをしてください",
+            "あなたの座右の銘（好きな言葉）は何ですか？",
+            "あなたが困難を乗り越えた経験を教えてください。",
+            "親しい友人はいますか？",
+            "将来の目標は何ですか？",
+            "将来、どんな人になりたいですか？",
+            "今頑張っていることは何ですか？",
+            "身だしなみはなぜ大切だと思いますか？",
+            "中学校と高校の違いは何だと思いますか？",
+            "面接練習はどのくらいしましたか？",
+            "中学校の校則について、自分の考えを教えてください",
+            "あなたのクラスはどんなクラスですか？",
+            "学校で一番楽しかった思い出は何ですか？",
+            "自分にとって大切なものは何ですか？",
+            "尊敬する人はいますか？",
+            "友達と接する上で大切なことは？",
+            "普段どんなテレビ番組を見ていますか？",
+            "社会貢献をするために大切なことはなんですか？",
+            "リーダーとして大切なことは？",
+            "リーダーシップを発揮した経験は？",
+            "最近読んだ本について教えてください。",
+            "高校でどんな３年間を送りたいですか？",
+            "今、不安か楽しみ、どちらが強いですか？",
+            "高校に入学するまでにどんなことをしたいですか？",
+            "高校ではどんなことを頑張りたいですか？"
+        ];
+
+        let currentQuestionIndex = -1;
+        let timerSeconds = 0;
+        let timerInterval;
+
+        document.getElementById('startButton').style.display = 'block'; // 最初のボタンを表示する
+        document.getElementById('startButton').addEventListener('click', () => {
+            document.getElementById('startButton').style.display = 'none';
+            document.getElementById('nextButton').style.display = 'block';
+            showNextQuestion();
+        });
+
+        document.getElementById('nextButton').addEventListener('click', showNextQuestion);
+
+        function showNextQuestion() {
+            currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
+            document.getElementById('question').textContent = questions[currentQuestionIndex];
+            clearInterval(timerInterval);
+            timerSeconds = 0;
+            document.getElementById('timer').textContent = timerSeconds;
+            timerInterval = setInterval(() => {
+                timerSeconds++;
+                document.getElementById('timer').textContent = timerSeconds;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
